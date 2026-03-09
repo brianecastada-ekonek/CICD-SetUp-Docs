@@ -220,21 +220,15 @@ sudo -u jenkins cat ~/.ssh/id_ed25519_github.pub
 
 ### 7.2 GitHub Webhook Configuration
 
-Webhooks instruct GitHub to notify Jenkins on every push or pull request. Jenkins must be reachable from the internet on a public IP or via a tunnel (e.g., ngrok, Cloudflare Tunnel) if it is on a private network.
+Webhooks instruct GitHub to notify Jenkins on every push or pull request. Jenkins must be reachable from the internet — if your server has a public domain, point the webhook directly to it.
 
 #### Setting up the Webhook in GitHub
 
 1. Go to the repository > **Settings > Webhooks > Add webhook**
-2. Set **Payload URL** to: `http://<jenkins-public-url>/github-webhook/`
+2. Set **Payload URL** to: `https://<your-domain>/github-webhook/`
 3. Set **Content type** to `application/json`
 4. Select **Just the push event** (or customize as needed)
 5. Save — GitHub will send a test ping
-
-> **NOTE:** If Jenkins is behind a private IP (e.g., `172.x.x.x`), use ngrok to expose it:
-> ```bash
-> ngrok http 8080
-> ```
-> Then set the ngrok HTTPS URL as the webhook payload URL. Update the webhook URL whenever the tunnel restarts.
 
 ---
 
